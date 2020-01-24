@@ -15,16 +15,10 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'byn' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'byn' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
+			<span class="sep"> 2020 &copy; </span>
 				<?php
 				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'byn' ), 'byn', '<a href="https://nohaco.com">nohaco</a>' );
+				printf( esc_html__( '%1$s', 'byn' ), '<a href="https://nohaco.com">nohaco</a>' );
 				?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

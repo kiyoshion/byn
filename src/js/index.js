@@ -1,1 +1,10 @@
-import "../sass/style.scss"
+import "../sass/style.scss";
+import gsap from 'gsap/';
+import { Power4 } from 'gsap/EasePack';
+import barba from '@barba/core'
+import barbaCss from '@barba/css'
+import barbaPrefetch from '@barba/prefetch'
+
+barba.use(barbaCss);
+barba.use(barbaPrefetch);
+barba.init();
