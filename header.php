@@ -9,6 +9,9 @@
  * @package byn
  */
 
+$page = get_post( get_the_ID() );
+$page_slug = $page->post_name;
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -17,42 +20,61 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
+	<?php if ( is_single()): ?>
+	<?php if ($post->post_excerpt){ ?>
+	<meta name="description" content="<? echo $post->post_excerpt; ?>" />
+	<?php } else {
+			$summary = strip_tags($post->post_content);
+			$summary = str_replace("\n", "", $summary);
+			$summary = mb_substr($summary, 0, 120). "…"; ?>
+	<meta name="description" content="<?php echo $summary; ?>" />
+	<?php } ?>
+	<?php elseif ( is_home() || is_front_page() ): ?>
+	<meta name="description" content="<?php bloginfo('description'); ?>" />
+	<?php elseif ( is_category() ): ?>
+	<meta name="description" content="<?php echo category_description(); ?>" />
+	<?php elseif ( is_tag() ): ?>
+	<meta name="description" content="<?php echo tag_description(); ?>" />
+	<?php else: ?>
+	<meta name="description" content="<?php the_excerpt();?>" />
+	<?php endif; ?>
+
 	<?php wp_head(); ?>
 </head>
 
-<body data-barba="wrapper" <?php body_class(); ?>>
+<body>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'byn' ); ?></a>
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+	<header class="header">
+		<div class="header__inner">
+			<div class="header__logo">
 				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+				the_custom_logo();
+				if ( is_front_page() && is_home() ) :
+					?>
+					<h1 class="header__ttl"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					<?php
+				else :
+					?>
+					<p class="header__ttl"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+					<?php
+				endif; ?>
+			</div>
+
+			<nav class="header__nav">
 				<?php
-			endif;
-			$byn_description = get_bloginfo( 'description', 'display' );
-			if ( $byn_description || is_customize_preview() ) :
+				wp_nav_menu( array(
+					'theme_location' => 'menu-1',
+					'menu_id'			=> '',
+					'menu_class'        => 'header__nav-list',
+					'container_class'	=> 'header__nav-inner'
+				) );
 				?>
-				<p class="site-description"><?php echo $byn_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+			</nav>
+		</div>
+	</header>
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'byn' ); ?></button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
-
-	<div data-barba="container" id="content" class="site-content">
+		<main data-barba="wrapper">
+			<div data-barba="container" <?php body_class( 'content page-' . $page_slug ); ?> data-barba-namespace="<?php echo $page_slug; ?>">
+				<?php /*get_template_part( 'template-parts/content', 'hero' ); */?>

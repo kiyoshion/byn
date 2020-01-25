@@ -17,7 +17,7 @@ module.exports = {
                     {
                         loader: "css-loader",
                         options: {
-                            url: false,
+                            // url: false,
                             sourceMap: enabledSourceMap,
                             importLoaders: 2
                         }
@@ -40,6 +40,21 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                loaders: [
+                    'url-loader'
+                ]
+                // use: [
+                //     {
+                //         loader: 'file-loader',
+                //         options: {
+                //             name: '[name].[ext]',
+                //             outputPath: 'fonts/'
+                //         }
+                //     }
+                // ]
             }
         ]
     }

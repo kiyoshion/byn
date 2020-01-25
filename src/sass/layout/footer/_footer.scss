@@ -1,0 +1,13 @@
+.footer {
+    position: absolute;
+    top: 50%;
+    right: 2%;
+    transform: translateY(-50%);
+    writing-mode: vertical-lr;
+    &__info {
+        font-size: .8rem;
+    }
+    &__copy {
+        font-size: .6rem;
+    }
+}

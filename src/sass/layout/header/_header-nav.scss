@@ -1,0 +1,13 @@
+.header__nav {
+    &-list {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        li {
+            margin-right: 2rem;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

@@ -10,19 +10,19 @@
  */
 
 ?>
+		</div>
+	</main>
 
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<span class="sep"> 2020 &copy; </span>
+	<footer class="footer">
+		<div class="footer__info">
+			<span class="footer__copy"> 2020 &copy; </span>
 				<?php
 				/* translators: 1: Theme name, 2: Theme author. */
 				printf( esc_html__( '%1$s', 'byn' ), '<a href="https://nohaco.com">nohaco</a>' );
 				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+		</div>
+	</footer>
+</div>
 
 <?php wp_footer(); ?>
 

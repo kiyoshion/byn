@@ -79,6 +79,12 @@ if ( ! function_exists( 'byn_setup' ) ) :
 			'flex-width'  => true,
 			'flex-height' => true,
 		) );
+
+		/**
+		 * Remove p tag from excerpt and description
+		 */
+		remove_filter('the_excerpt', 'wpautop');
+		remove_filter('term_description','wpautop');
 	}
 endif;
 add_action( 'after_setup_theme', 'byn_setup' );
