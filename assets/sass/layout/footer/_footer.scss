@@ -1,0 +1,24 @@
+.footer {
+    position: fixed;
+    // top: 50%;
+    right: 2.5%;
+    bottom: 2.5%;
+    writing-mode: vertical-lr;
+    mix-blend-mode: exclusion;
+    opacity: 0;
+    transition: all .4s ease;
+    z-index: -1;
+    &__info {
+        font-size: .6rem;
+    }
+    &.is-active {
+        opacity: 1;
+        z-index: 1;
+    }
+    @include mq() {
+        transform: translateY(-60%);
+        &.is-active {
+            transform: translateY(-50%);
+        }
+    }
+}

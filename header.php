@@ -11,8 +11,15 @@
 
 $page = get_post( get_the_ID() );
 $page_slug = $page->post_name;
+$thumb = get_the_post_thumbnail_url( get_the_ID(), 'full'); 
+if ( is_front_page() ) :
+	$namespace = 'has-thumb';
+else :
+	$namespace = ($thumb)? 'has-thumb' : 'has-no-thumb';
+endif;
 
 ?>
+
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -49,17 +56,9 @@ $page_slug = $page->post_name;
 	<header class="header">
 		<div class="header__inner">
 			<div class="header__logo">
-				<?php
-				the_custom_logo();
-				if ( is_front_page() && is_home() ) :
-					?>
-					<h1 class="header__ttl"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-					<?php
-				else :
-					?>
-					<p class="header__ttl"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-					<?php
-				endif; ?>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="<?php bloginfo('name'); ?>">
+				</a>
 			</div>
 
 			<nav class="header__nav">
@@ -75,6 +74,6 @@ $page_slug = $page->post_name;
 		</div>
 	</header>
 
-		<main data-barba="wrapper">
-			<div data-barba="container" <?php body_class( 'content page-' . $page_slug ); ?> data-barba-namespace="<?php echo $page_slug; ?>">
-				<?php /*get_template_part( 'template-parts/content', 'hero' ); */?>
+	<main data-barba="wrapper" class="content__wrapper">
+		<div data-scroll data-barba="container" <?php body_class( 'page-' . $page_slug ); ?> data-barba-namespace="<?php echo $namespace; ?>">
+			<?php get_template_part( 'template-parts/content', 'hero-' . $namespace ); ?>

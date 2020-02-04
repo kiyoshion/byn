@@ -11,17 +11,33 @@
 
 ?>
 		</div>
-	</main>
+</main>
 
 	<footer class="footer">
 		<div class="footer__info">
-			<span class="footer__copy"> 2020 &copy; </span>
+			<span class="footer__copy">&copy; 2020 
 				<?php
 				/* translators: 1: Theme name, 2: Theme author. */
 				printf( esc_html__( '%1$s', 'byn' ), '<a href="https://nohaco.com">nohaco</a>' );
 				?>
+			</span>
 		</div>
 	</footer>
+
+	<div class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+		<span></span>
+		<span></span>
+	</div>
+	<div class="modal-menu">
+		<div class="modal-menu__inner">
+		<?php
+				wp_nav_menu( array(
+					'menu' => 'modal'
+				) );
+				?>
+		</div>
+	</div>
+
 </div>
 
 <?php wp_footer(); ?>

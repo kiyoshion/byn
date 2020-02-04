@@ -3,7 +3,7 @@ const enabledSourceMap = MODE === "development";
 
 module.exports = {
     mode: MODE,
-    entry: `./src/js/index.js`,
+    entry: `./assets/js/index.js`,
     // output: {
     //     path: `${__dirname}/dist`,
     //     filename: "main.js"

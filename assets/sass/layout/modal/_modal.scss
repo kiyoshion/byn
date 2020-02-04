@@ -1,0 +1,148 @@
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 55px;
+    height: 55px;
+    padding: 10px;
+    z-index: 101;
+    &:hover {
+        cursor: pointer;
+    }
+    span {
+        position: absolute;
+        display: block;
+        background-color: $color__text-main;
+        width: 28px;
+        height: 1px;
+        transition: all .2s;
+        &:nth-child(1) {
+            top: 20px;
+        }
+        &:nth-child(2) {
+            top: 32px;
+        }
+        &:nth-child(3) {
+            top: 32px;
+        }
+    }
+    &.is-active {
+        span {
+            background-color: #fff;
+            &:nth-child(1) {
+                top: 26px;
+                transform: rotate(135deg);
+            }
+            &:nth-child(2) {
+                top: 26px;
+                transform: rotate(-135deg);
+            }
+        }
+    }
+}
+
+.modal-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(18, 18, 18, 1);
+    background-position: center center;
+    background-size: 60% 60%;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    color: #fff;
+    font-family: $font__main;
+    z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+    height: 100%;
+    transition: opacity .8s ease .4s, visibility .8s ease .4s; 
+    &__inner {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        transition: all .4s;
+        opacity: 0;
+        transform: translateY(-45%);
+        ul {
+            font-size: 2rem;
+            padding: 0;
+            margin: 0;
+            a {
+                color: #fff;
+                padding: 1rem;
+            }
+        }
+    }
+    &.is-active {
+        visibility: visible;
+        opacity: 1;
+        height: 100%;
+        transition: opacity .4s, visibility .4s;
+        .modal-menu__inner {
+            opacity: 1;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+@keyframes modalClose {
+    0% {
+        display: block;
+        opacity: 1;
+        height: 100%;
+    }
+    50% {
+        display: block;
+        opacity: 1;
+        height: 50%;
+
+    }
+    99% {
+        display: block;
+        opacity: 0;
+        height: 0;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+        height: 0;
+    }
+}
+
+@keyframes modalOpen {
+    0% {
+        display: none;
+        opacity: 0;
+        background-size: 60% 60%;
+        height: 0;
+    }
+    1% {
+        display: block;
+        opacity: 0;
+        background-size: 60% 60%;
+        height: 0;
+    }
+    10% {
+        display: block;
+        opacity: 0;
+        background-size: 60% 60%;
+        height: 100%;
+    }
+    100% {
+        display: block;
+        opacity: 1;
+        background-size: 55% 55%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .menu-toggle {
+        display: block;
+        top: 1rem;
+        right: 0;
+    }
+}

@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="content__entry content__entry--medium">
+<div class="content__entry content__entry--full">
 	<?php
 	the_content();
 	?>

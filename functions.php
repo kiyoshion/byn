@@ -128,6 +128,8 @@ add_action( 'widgets_init', 'byn_widgets_init' );
 function byn_scripts() {
 	wp_enqueue_style( 'byn-style', get_stylesheet_uri() );
 
+	wp_enqueue_style( 'Noto Sans JP', 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:500&display=swap' );
+
 	wp_enqueue_script( 'main', get_template_directory_uri() . '/dist/main.js', array(), '', true );
 
 
