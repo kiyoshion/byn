@@ -3,10 +3,21 @@
     position: fixed;
     top: 1rem;
     right: 1rem;
+    // right: 5%;
     width: 55px;
     height: 55px;
     padding: 10px;
     z-index: 101;
+    &::after {
+        content: 'MENU';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: 20px;
+        line-height: 1;
+        // right: -5vw;
+        transform: translate(0, -50%);
+    }
     &:hover {
         cursor: pointer;
     }
@@ -15,19 +26,24 @@
         display: block;
         background-color: $color__text-main;
         width: 28px;
-        height: 1px;
+        height: 2px;
         transition: all .2s;
         &:nth-child(1) {
             top: 20px;
         }
         &:nth-child(2) {
             top: 32px;
+            width: 24px;
+            margin-left: 4px;
         }
         &:nth-child(3) {
             top: 32px;
         }
     }
     &.is-active {
+        &::after {
+            color: #fff;
+        }
         span {
             background-color: #fff;
             &:nth-child(1) {
@@ -36,6 +52,8 @@
             }
             &:nth-child(2) {
                 top: 26px;
+                width: 28px;
+                margin-left: 0;
                 transform: rotate(-135deg);
             }
         }
@@ -46,7 +64,9 @@
     position: fixed;
     top: 0;
     left: 0;
+    width: 50%;
     width: 100%;
+    height: 100%;
     background-color: rgba(18, 18, 18, 1);
     background-position: center center;
     background-size: 60% 60%;
@@ -55,15 +75,16 @@
     color: #fff;
     font-family: $font__main;
     z-index: 100;
-    visibility: hidden;
     opacity: 0;
-    height: 100%;
-    transition: opacity .8s ease .4s, visibility .8s ease .4s; 
+    visibility: hidden;
+    transform: translateX(240%) skewX(5deg);
+    transform: translateY(0%) skewY(0);
+    transition: opacity .4s ease .2s, visibility .4s ease .2s, transform .4s ease-in-out;
     &__inner {
         position: absolute;
         top: 50%;
         left: 10%;
-        transition: all .4s;
+        transition: all .4s ease .4s;
         opacity: 0;
         transform: translateY(-45%);
         ul {
@@ -77,10 +98,11 @@
         }
     }
     &.is-active {
-        visibility: visible;
+        transform: translateX(100%) skewY(0);
+        transform: translateY(0) skewY(0);
         opacity: 1;
-        height: 100%;
-        transition: opacity .4s, visibility .4s;
+        visibility: visible;
+        transition: opacity .4s, visibility .4s, transform .4s;
         .modal-menu__inner {
             opacity: 1;
             transform: translateY(-50%);
@@ -139,10 +161,45 @@
     }
 }
 
-@media screen and (max-width: 769px) {
-    .menu-toggle {
-        display: block;
-        top: 1rem;
-        right: 0;
+.menu-toggle {
+    display: block;
+    top: .5rem;
+    right: 15%;
+    &::after {
+        // right: -18vw;
+    }
+    @include mq(sm) {
+        // display: none;
+        top: 1.5rem;
+        right: 10%;
+        &::after {
+            // right: -5vw;
+        }
+    }
+    @include mq() {
+        display: none;
+    }
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: $color__text-main;
+    transform: translate(0px, 0px);
+    z-index: 999;
+    transform: rotateY(90deg);
+    transform-origin: left;
+    visibility: hidden;
+    transition-property: transform, visibility;
+    transition-duration: .8s;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    &.is-close {
+        transform: rotateY(0deg);
+        transform-origin: right;
+        visibility: visible;
     }
 }

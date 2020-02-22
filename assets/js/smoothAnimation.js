@@ -59,7 +59,7 @@ export default function initSmoothAnimation() {
                     // when the item's top value (relative to the viewport) equals "-item's height" (item just exited the viewport) the translation = maximum value
                     setValue: () => {
                         const maxValue = this.renderedStyles.innerTranslationY.maxValue;
-                        const minValue = -2 * maxValue; // change to dynamic default -1
+                        const minValue = -2.15 * maxValue; // change to dynamic default -1
                         return Math.max(Math.min(MathUtils.map(this.props.top - docScroll, winsize.height, -1 * this.props.height, minValue, maxValue), maxValue), minValue)
                     }
                 }
@@ -172,7 +172,11 @@ export default function initSmoothAnimation() {
         }
         setSize() {
             // set the heigh of the body in order to keep the scrollbar on the page
-            body.style.height = `${this.DOM.scrollable.scrollHeight}px`;
+            const footerHeight = document.querySelector('.footer').clientHeight;
+                // body.style.height = `${this.DOM.scrollable.scrollHeight + footerHeight}px`;
+                body.style.height = `${this.DOM.scrollable.scrollHeight}px`;
+            
+                // body.style.height = `${this.DOM.scrollable.scrollHeight}px`;
         }
         style() {
             // the <main> needs to "stick" to the screen and not scroll

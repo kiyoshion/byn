@@ -11,6 +11,19 @@ textarea {
 	letter-spacing: $font__letter-spacing;
 }
 
+p {
+	text-align: justify;
+}
+
+.font {
+	&--en {
+		font-family: $font__main;
+	}
+	&--white {
+		color: #fff;
+	}
+}
+
 @import "headings";
 
 @import "copy";

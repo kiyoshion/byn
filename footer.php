@@ -14,8 +14,8 @@
 </main>
 
 	<footer class="footer">
-		<div class="footer__info">
-			<span class="footer__copy">&copy; 2020 
+		<div class="footer__info footer__inner">
+			<span class="footer__copy">&copy;
 				<?php
 				/* translators: 1: Theme name, 2: Theme author. */
 				printf( esc_html__( '%1$s', 'byn' ), '<a href="https://nohaco.com">nohaco</a>' );
@@ -28,7 +28,7 @@
 		<span></span>
 		<span></span>
 	</div>
-	<div class="modal-menu">
+	<div class="modal-menu" style="background-image:url('<?php echo get_template_directory_uri(); ?>/assets/images/logo-white.svg');">
 		<div class="modal-menu__inner">
 		<?php
 				wp_nav_menu( array(
@@ -37,6 +37,7 @@
 				?>
 		</div>
 	</div>
+	<div class="mask"></div>
 
 </div>
 

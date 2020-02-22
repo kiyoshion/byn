@@ -14,3 +14,10 @@
 	the_content();
 	?>
 </div>
+
+
+<?php 
+	if ( !is_page('contact') ):
+		get_template_part( 'template-parts/content', 'cta' ); 
+	endif;
+?>

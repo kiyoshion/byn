@@ -14,7 +14,7 @@
 
 <div class="hero hero--has-thumb">
 	<div class="hero__bg" style="background-image:url('<?php echo $thumb; ?>')"></div>
-	<h1 class="hero__ttl"><?php the_title(); ?></h1>
+	<!-- <h1 class="hero__ttl"><?php the_title(); ?></h1> -->
 	<div class="hero__lead">
 		<div class="hero__lead-inner">
 			<h2 class="hero__lead-ttl"><?php echo post_custom( 'sub_ttl' ); ?></h2>
@@ -34,6 +34,8 @@
 </div>
 
 <?php elseif ( is_front_page() ) : 
+	$get_page_id = get_page_by_path("front");
+	$pid = $get_page_id->ID;
 	$thumbs_path = '/assets/images/';
 	$thumbs = [];
 	?>
@@ -44,13 +46,15 @@
 			$is_active = ( $i == 0 ) ? ' is-active' : '';
 			?>
 			<div class="hero__bg<?php echo $is_active; ?>" style="background-image:url('<?php echo $thumbs[$i]; ?>')"></div>
+<?php /*?>			<div class="hero__bg<?php echo $is_active; ?>" style="overflow:visible;">
+			<img style="width:100%;" src="<?php echo $thumbs[$i]; ?>" alt=""></div><?php */?>
 		<?php endfor;
 	?>
 	<h1 class="hero__ttl"></h1>
 	<div class="hero__lead">
 		<div class="hero__lead-inner">
-			<h2 class="hero__lead-ttl">HELLO</h2>
-			<p class="hero__lead-txt">I'm a freelance engineer in japan. This is service for crowdsourcing.</p>
+			<h2 class="hero__lead-ttl"><?php the_field( 'hero_ttl', $pid ); ?></h2>
+			<p class="hero__lead-txt"><?php the_field( 'hero_description', $pid ); ?></p>
 		</div>
 	</div>
 	<div class="hero__scroll">
@@ -76,7 +80,7 @@
 ?>
 <div class="hero hero--has-thumb">
 	<div class="hero__bg" style="background-image:url('<?php echo $thumb; ?>')"></div>
-	<h1 class="hero__ttl"><?php echo $obj->labels->name; ?></h1>
+	<?php /*?><h1 class="hero__ttl"><?php echo $obj->labels->name; ?></h1><?php */?>
 	<div class="hero__lead">
 		<div class="hero__lead-inner">
 			<h2 class="hero__lead-ttl"><?php echo $obj->labels->singular_name; ?></h2>

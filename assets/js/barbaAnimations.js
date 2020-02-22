@@ -9,44 +9,47 @@ function leaveAnimation(data, done) {
     const hltxt = data.querySelector('.hero__lead-txt');
     const hs = data.querySelector('.hero__scroll');
     h.classList.remove('is-active');
+    // mask.style.transform = 'translateY(100%)';
+
+    let mask = document.querySelector('.mask');
+    mask.classList.add('is-close');
 
     gsap.to(hbg, {
         duration: 1.2,
         ease: "power4.inOut",
-        x: 50,
+        y: -110,
         opacity: 0,
         onComplete: () => {
             done();
         }
     })
 
-    gsap.to(httl, {
-        duration: .8,
-        ease: "power4.inOut",
-        x: 30,
-        opacity: 0,
-    })
+    // hlttl.querySelectorAll('.js-ttl').forEach(function (e, index) {
+    //     gsap.to(e, {
+    //         duration: 2.2,
+    //         delay: index * 0.05,
+    //         ease: "power4.out",
+    //         y: -75,
+    //         opacity: 0,
+    //     })
+    // })
 
-    gsap.to(hlttl, {
-        duration: .8,
-        ease: "power4.inOut",
-        x: 25,
-        opacity: 0,
-    })
+    // hltxt.querySelectorAll('.js-txt').forEach(function (e, index) {
+    //     gsap.to(e, {
+    //         duration: 1.8,
+    //         delay: 0.05 + (index * 0.05),
+    //         ease: "power4.out",
+    //         y: -50,
+    //         opacity: 0,
+    //     })
+    // })
 
-    gsap.to(hltxt, {
-        duration: .8,
-        ease: "power4.inOut",
-        x: 20,
-        opacity: 0,
-    })
-
-    gsap.to(hs, {
-        duration: .8,
-        ease: "power4.inOut",
-        x: 10,
-        opacity: 0,
-    })
+    // gsap.to(hs, {
+    //     duration: .8,
+    //     ease: "power4.inOut",
+    //     x: 10,
+    //     opacity: 0,
+    // })
 }
 
 function enterAnimation(current) {
@@ -69,6 +72,29 @@ function enterAnimation(current) {
         const ce = current.container.querySelector('.content__entry');
         // header.classList.add('is-active');
 
+        let hlttlContent = hlttl.textContent;
+        let strs = hlttlContent.split('');
+        hlttl.textContent = '';
+        strs.forEach(function (value) {
+            const tag = document.createElement('span');
+            tag.className = 'js-ttl';
+            if (value == ' ') {
+                tag.className = 'is-space';
+            } 
+            tag.innerHTML = value;
+            hlttl.appendChild(tag);
+        })
+
+        let hltxtContent = hltxt.textContent;
+        let txts = hltxtContent.split(' ');
+        hltxt.textContent = '';
+        txts.forEach(function (value) {
+            const tags = document.createElement('span');
+            tags.className = 'js-txt';
+            tags.innerHTML = value;
+            hltxt.appendChild(tags);
+        })
+
         gsap.to(hbg, {
             duration: 1,
             ease: "power4.inOut",
@@ -77,25 +103,69 @@ function enterAnimation(current) {
 
         if (w > 769) {
             gsap.to(hbg, {
-                duration: .6,
+                // duration: .6,
+                duration: 1,
                 delay: 1.2,
                 ease: "power4.out",
-                scale: .75,
+                scale: .8,
                 onComplete: function () {
                     hero.classList.add('is-active');
                 }
             });
+            hlttl.querySelectorAll('.js-ttl').forEach(function (e, index) {
+                gsap.to(e, {
+                    duration: 1,
+                    delay: 1.6 + (index * 0.05),
+                    ease: "power4.out",
+                    y: 0,
+                    opacity: 1,
+                })
+            })
+            hltxt.querySelectorAll('.js-txt').forEach(function (e, index) {
+                gsap.to(e, {
+                    duration: 1.2,
+                    delay: 1.6 + (index * 0.05),
+                    ease: "power4.out",
+                    y: 0,
+                    opacity: 1,
+                })
+            })
         } else {
             gsap.to(hbg, {
                 duration: .6,
                 delay: 1.2,
                 ease: "power4.out",
-                scale: 1,
+                scale: .9,
+                x: '10%',
+                y: '5%',
                 onComplete: function () {
                     hero.classList.add('is-active');
                 }
             });
 
+            gsap.to(hlttl, {
+                duration: 1,
+                delay: 1.8,
+                ease: "power4.out",
+                x: 0,
+                y: 0,
+                rotate: 0,
+                skewX: 0,
+                skewY: 0,
+                opacity: 1,
+            })
+
+            gsap.to(hltxt, {
+                duration: 1,
+                delay: 1.9,
+                ease: "power4.out",
+                x: 0,
+                y: 0,
+                rotate: 0,
+                skewX: 0,
+                skewY: 0,
+                opacity: 1,
+            })
         }
 
         gsap.to(httl, {
@@ -110,29 +180,8 @@ function enterAnimation(current) {
             opacity: 1,
         })
 
-        gsap.to(hlttl, {
-            duration: .8,
-            delay: 1.8,
-            ease: "power4.out",
-            x: 0,
-            y: 0,
-            rotate: 0,
-            skewX: 0,
-            skewY: 0,
-            opacity: 1,
-        })
 
-        gsap.to(hltxt, {
-            duration: .8,
-            delay: 1.8,
-            ease: "power4.out",
-            x: 0,
-            y: 0,
-            rotate: 0,
-            skewX: 0,
-            skewY: 0,
-            opacity: 1,
-        })
+
 
         gsap.to(hs, {
             duration: 1,
