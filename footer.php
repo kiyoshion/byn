@@ -15,11 +15,12 @@
 
 	<footer class="footer">
 		<div class="footer__info footer__inner">
-			<span class="footer__copy">&copy;
+			<span class="footer__copy">
 				<?php
 				/* translators: 1: Theme name, 2: Theme author. */
 				printf( esc_html__( '%1$s', 'byn' ), '<a href="https://nohaco.com">nohaco</a>' );
 				?>
+				 ALL RIGHTS RESERVED.
 			</span>
 		</div>
 	</footer>
@@ -41,6 +42,7 @@
 
 </div>
 
+<div class="stalker"></div>
 <?php wp_footer(); ?>
 
 </body>

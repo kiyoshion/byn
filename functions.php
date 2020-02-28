@@ -129,8 +129,6 @@ function byn_scripts() {
 	wp_enqueue_style( 'byn-style', get_stylesheet_uri() );
 
 	wp_enqueue_style( 'Noto Sans JP', 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:500&display=swap' );
-	wp_enqueue_style( 'Montserrat', 'https://fonts.googleapis.com/css?family=Montserrat:500&display=swap' );
-	wp_enqueue_style( 'Montserrat', 'https://fonts.googleapis.com/css?family=EB+Garamond:500|Montserrat:500&display=swap' );
 
 	wp_enqueue_script( 'main', get_template_directory_uri() . '/dist/main.js', array(), '', true );
 
@@ -144,6 +142,59 @@ function byn_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'byn_scripts' );
+
+function my_meta_ogp() {
+  if( is_front_page() || is_home() || is_singular() ){
+    global $post;
+    $ogp_title = '';
+    $ogp_descr = '';
+    $ogp_url = '';
+    $ogp_img = '';
+    $insert = '';
+
+    if( is_singular() ) {
+       setup_postdata($post);
+       $ogp_title = $post->post_title;
+       $ogp_descr = mb_substr(get_the_excerpt(), 0, 200);
+       $ogp_url = get_permalink();
+       wp_reset_postdata();
+    } elseif ( is_front_page() || is_home() ) {
+       $ogp_title = get_bloginfo('name');
+       $ogp_descr = get_bloginfo('description');
+       $ogp_url = home_url();
+    }
+
+    //og:type
+    $ogp_type = ( is_front_page() || is_home() ) ? 'website' : 'article';
+
+    //og:image
+    if ( is_singular() && has_post_thumbnail() ) {
+       $ps_thumb = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full');
+       $ogp_img = $ps_thumb[0];
+    } else {
+     $ogp_img = get_template_directory_uri() . '/assets/images/front-0.jpg';
+    }
+
+    //出力するOGPタグをまとめる
+    $insert .= '<meta property="og:title" content="'.esc_attr($ogp_title).'" />' . "\n";
+    $insert .= '<meta property="og:description" content="'.esc_attr($ogp_descr).'" />' . "\n";
+    $insert .= '<meta property="og:type" content="'.$ogp_type.'" />' . "\n";
+    $insert .= '<meta property="og:url" content="'.esc_url($ogp_url).'" />' . "\n";
+    $insert .= '<meta property="og:image" content="'.esc_url($ogp_img).'" />' . "\n";
+    $insert .= '<meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'" />' . "\n";
+    $insert .= '<meta name="twitter:card" content="summary_large_image" />' . "\n";
+    $insert .= '<meta name="twitter:site" content="'.esc_attr(get_bloginfo('name')).'" />' . "\n";
+    $insert .= '<meta property="og:locale" content="ja_JP" />' . "\n";
+
+    //facebookのapp_id（設定する場合）
+    // $insert .= '<meta property="fb:app_id" content="ここにappIDを入力">' . "\n";
+    //app_idを設定しない場合ここまで消す
+
+    echo $insert;
+  }
+} //END my_meta_ogp
+
+add_action('wp_head','my_meta_ogp');//headにOGPを出力
 
 /**
  * Implement the Custom Header feature.

@@ -10,6 +10,7 @@ import setContactForm from './setContactForm'
 import smoothScroll from './smoothScroll'
 import smoothAnimation from './smoothAnimation'
 import { toggleModal, resetModal } from './toggleModal'
+import scrollStalker from './scrollStalker'
 import loading from './loading'
 // import contactAnimation from './contactAnimation'
 
@@ -48,6 +49,7 @@ barba.use(barbaPrefetch);
 promise.then(() => {
 
     let width = window.innerWidth;
+    let body = document.querySelector('body');
 
     barba.hooks.beforeEnter((data) => {
         // this hook will be called for each transitions
@@ -56,15 +58,33 @@ promise.then(() => {
         smoothScroll(data.next.container);
         replaceHeadTags(data.next.html);
         resetModal();
+
         // contactAnimation();
-        if (width > 767) {
-            smoothAnimation();
+        let userAgent = window.navigator.userAgent.toLowerCase();
+        // check browser
+        if (userAgent.indexOf('edge') != -1) {
+            body.classList.add('is-edge');
+        } else if (userAgent.indexOf('chrome') != -1) {
+            body.classList.add('is-chrome');
+            if (width > 767) {
+                smoothAnimation();
+            }
+        } else if (userAgent.indexOf('safari') != -1) {
+            body.classList.add('is-safari');
+        } else if (userAgent.indexOf('firefox') != -1) {
+            body.classList.add('is-firefox');
+            if (width > 767) {
+                smoothAnimation();
+            }
         }
         if (data.next.url.path.indexOf('contact') != -1) {
             setContactForm();
         }
         let mask = document.querySelector('.mask');
         mask.classList.remove('is-close');
+        if (width > 768) {
+            scrollStalker();
+        }
     });
     barba.init({
         debug: false,

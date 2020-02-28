@@ -1,8 +1,14 @@
+.is-edge,
+.is-safari {
+    .hero__lead {
+        color: $color__text-main;
+        mix-blend-mode: inherit;
+    }
+}
 .hero {
     position: relative;
     width: 100%;
     height: 80vh;
-    height: 100vh;
     overflow: hidden;
     &--has-no-thumb {
         // height: 200px;
@@ -34,7 +40,7 @@
         height: 0;
         background-color: #fff;
         transition: transform 0.2s cubic-bezier(0.075, 0.82, 0.165, 1), width 0.4s cubic-bezier(0.075, 0.82, 0.165, 1), height 0.4s cubic-bezier(0.075, 0.82, 0.165, 1) 2.4s;
-        transition: transform 0.2s cubic-bezier(0.075, 0.82, 0.165, 1), width 0.4s cubic-bezier(0.075, 0.82, 0.165, 1), height 1.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transition: transform 0.2s cubic-bezier(0.075, 0.82, 0.165, 1), width 0.4s cubic-bezier(0.075, 0.82, 0.165, 1), height 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 1.6s;
         z-index: 9;
     }
     &.is-active {
@@ -44,8 +50,9 @@
     }
     &__bg {
         position: relative;
+        width: 100%;
         height: 100%;
-        background-attachment: fixed;
+        background-attachment: scroll;
         background-position: 40% 45%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -62,10 +69,21 @@
             background-color: rgba(0, 0, 0, .15);
             z-index: -1;
         }
+        &-inner {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background-color: #fff;
+            transform: translate(0, 0);
+            will-change: transform;
+        }
     }
     &__ttl {
         position: absolute;
         color: #fff;
+        color: $color__text-main;
         font-size: 1.5rem;
         bottom: 3.25%;
         left: 50%;
@@ -127,6 +145,7 @@
     @include mq() {
         height: 100vh;
         &__bg {
+            background-attachment: fixed;
             background-position: center;
             &::before {
                 display: none;
@@ -158,7 +177,6 @@
             &-ttl {
                 font-size: 4rem;
                 letter-spacing: .5rem;
-                line-height: 1.5;
                 margin-left: 0;
                 // transform: skewY(5deg) translate(0, 50px);
                 transform: inherit;
@@ -167,14 +185,18 @@
                 // overflow: hidden;
                 .js-ttl {
                     display: inline-block;
-                    transform: translateY(50px);
-                    opacity: 0;
+                    overflow: hidden;
+                    span {
+                        display: inline-block;
+                        transform: translate3d(0, 100%, 0);
+                    }
                 }
             }
             &-txt {
-                margin: 1rem 0;
-                width: 50%;
+                margin: 0;
+                // width: 50%;
                 text-align: left;
+                letter-spacing: .25rem;
                 // transform: skewY(5deg) translate(0, 50px);
                 transform: inherit;
                 writing-mode: inherit;

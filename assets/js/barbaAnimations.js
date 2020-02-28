@@ -58,8 +58,10 @@ function enterAnimation(current) {
 
     try {
         const hbg = current.container.querySelector('.hero__bg');
-        hbg.style.width = 0;
+        const hbgi = current.container.querySelector('.hero__bg-inner');
+        // hbg.style.width = 0;
         hbg.style.transform = 'scale3d(1.00, 1.00, 1.00)';
+        hbgi.style.transform = 'translate(0, 0)';
 
         const httl = current.container.querySelector('.hero__ttl');
         const hlttl = current.container.querySelector('.hero__lead-ttl');
@@ -77,12 +79,14 @@ function enterAnimation(current) {
         hlttl.textContent = '';
         strs.forEach(function (value) {
             const tag = document.createElement('span');
+            const tagInner = document.createElement('span');
             tag.className = 'js-ttl';
             if (value == ' ') {
                 tag.className = 'is-space';
             } 
-            tag.innerHTML = value;
+            tagInner.innerHTML = value;
             hlttl.appendChild(tag);
+            tag.appendChild(tagInner);
         })
 
         let hltxtContent = hltxt.textContent;
@@ -94,31 +98,32 @@ function enterAnimation(current) {
             tags.innerHTML = value;
             hltxt.appendChild(tags);
         })
-
-        gsap.to(hbg, {
-            duration: 1,
-            ease: "power4.inOut",
-            width: '100%',
-        });
+        
+        hero.classList.add('is-active');
 
         if (w > 769) {
-            gsap.to(hbg, {
-                // duration: .6,
-                duration: 1,
-                delay: 1.2,
-                ease: "power4.out",
-                scale: .8,
+            gsap.to(hbgi, {
+                duration: 1.2,
+                ease: "power4.inOut",
+                x: '100%',
                 onComplete: function () {
-                    hero.classList.add('is-active');
+                    gsap.to(hbg, {
+                        duration: 1,
+                        delay: 0,
+                        ease: "power4.out",
+                        scale: .8,
+                    });
                 }
             });
-            hlttl.querySelectorAll('.js-ttl').forEach(function (e, index) {
+            hlttl.querySelectorAll('.js-ttl span').forEach(function (e, index) {
                 gsap.to(e, {
                     duration: 1,
                     delay: 1.6 + (index * 0.05),
+                    // delay: 1.6,
                     ease: "power4.out",
                     y: 0,
-                    opacity: 1,
+                    onComplete: () => {
+                    }
                 })
             })
             hltxt.querySelectorAll('.js-txt').forEach(function (e, index) {
@@ -131,17 +136,35 @@ function enterAnimation(current) {
                 })
             })
         } else {
-            gsap.to(hbg, {
-                duration: .6,
-                delay: 1.2,
-                ease: "power4.out",
-                scale: .9,
-                x: '10%',
-                y: '5%',
+            gsap.to(hbgi, {
+                duration: 1.2,
+                ease: "power4.inOut",
+                x: '100%',
                 onComplete: function () {
-                    hero.classList.add('is-active');
+                    gsap.to(hbg, {
+                        duration: 1,
+                        delay: 0,
+                        ease: "power4.out",
+                        scale: .9,
+                        x: '10%',
+                        y: '5%',
+                        onComplete: function () {
+                            hero.classList.add('is-active');
+                        }
+                    });
                 }
             });
+            // gsap.to(hbg, {
+            //     duration: .6,
+            //     delay: 1.2,
+            //     ease: "power4.out",
+            //     scale: .9,
+            //     x: '10%',
+            //     y: '5%',
+            //     onComplete: function () {
+            //         hero.classList.add('is-active');
+            //     }
+            // });
 
             gsap.to(hlttl, {
                 duration: 1,
@@ -179,9 +202,6 @@ function enterAnimation(current) {
             skewY: 0,
             opacity: 1,
         })
-
-
-
 
         gsap.to(hs, {
             duration: 1,
@@ -247,7 +267,6 @@ function enterAnimationForNoThumb(current) {
 
     try {
         const hbg = current.container.querySelector('.hero__bg');
-        hbg.style.width = 0;
 
         const httl = current.container.querySelector('.hero__ttl');
         const hero = current.container.querySelector('.hero--has-no-thumb');

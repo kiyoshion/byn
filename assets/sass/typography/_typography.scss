@@ -7,8 +7,12 @@ textarea {
 	color: $color__text-main;
 	font-family: $font__main;
 	@include font-size(.8);
-	line-height: $font__line-height-body;
-	letter-spacing: $font__letter-spacing;
+	line-height: $font__line-height-body-sp;
+	letter-spacing: $font__letter-spacing-sp;
+	@include mq() {
+		line-height: $font__line-height-body;
+		letter-spacing: $font__letter-spacing;
+	}
 }
 
 p {
