@@ -6,6 +6,7 @@ optgroup,
 textarea {
 	color: $color__text-main;
 	font-family: $font__main;
+	font-weight: $font__weight;
 	@include font-size(.8);
 	line-height: $font__line-height-body-sp;
 	letter-spacing: $font__letter-spacing-sp;
@@ -17,6 +18,10 @@ textarea {
 
 p {
 	text-align: justify;
+}
+
+h1, h2, h3, h4, h5 {
+	font-weight: $font__weight;
 }
 
 .font {

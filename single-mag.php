@@ -33,11 +33,16 @@ get_header();
 				</div>
 			</div>
 			<div class="content__section">
-				<div class="content__section-grid">
-					<?php echo get_field( 'grid_area_1' ); ?>
+				<div class="content__section-flex">
+					<div class="content__section-flex--left">
+						<?php echo get_field( 'section_left' ); ?>
+					</div>
+					<div class="content__section-flex--right">
+						<?php echo get_field( 'section_right' ); ?>
+					</div>
 				</div>
-				<div class="content__section-grid content__section-grid--full">
-					<?php echo get_field( 'grid_area_2' ); ?>
+				<div class="content__section-flex--full">
+					<?php echo get_field( 'section_full' ); ?>
 				</div>
 			</div>
 		</div>
@@ -47,15 +52,15 @@ get_header();
 			$ttl = get_the_title();
 		?>
 		<div class="sharelink__wrapper">
-			<h3 class="sharelink__ttl">\ SHARE ME /</h3>
-			<div class="sharelink__list">
-				<div class="sharelink__twitter">
+			<h3 class="sharelink__ttl js-wrap">\ SHARE ME /</h3>
+			<div class="sharelink__list js-wrap">
+				<div class="sharelink__item">
 					<a href="https://twitter.com/share?url=<?php echo $url; ?>" rel="nofollow" target="_blank">TW</a>
 				</div>
-				<div class="sharelink__facebook">	
+				<div class="sharelink__item">	
 					<a href="http://www.facebook.com/share.php?u=<?php echo $url; ?>" rel="nofollow" target="_blank">FB</a>
 				</div>
-				<div class="sharelink__hatena">
+				<div class="sharelink__item">
 					<a href="http://b.hatena.ne.jp/add?mode=confirm&url=<?php echo $url; ?>&title=<?php echo $ttl; ?>" target="_blank" rel="nofollow">B!</a>
 				</div>
 			</div>
@@ -68,14 +73,14 @@ get_header();
 				$url = get_permalink( $prev_post->ID );
 				echo '<div class="pagelink__prev"><a href="' . $url . '"></a><span class="pagelink__txt">BACK NUMBER</span></div>';
 			} else {
-				echo '<div class="pagelink__prev"><a href="' . esc_url( home_url( '/mag' ) ) . '"></a><span class="pagelink__txt">This is oldest. Back to lists?</span></div>';
+				echo '<div class="pagelink__prev is-empty"><a href="' . esc_url( home_url( '/mag' ) ) . '"></a><span class="pagelink__txt">This is oldest number.<br>Back to lists?</span></div>';
 			}
 			$next_post = get_next_post();
 			if( !empty( $next_post ) ) {
 				$url = get_permalink( $next_post->ID );
 				echo '<div class="pagelink__next"><a href="' . $url . '"></a><span class="pagelink__txt">NEXT NUMBER</span></div>';
 			} else {
-				echo '<div class="pagelink__next"><a href="' . esc_url( home_url( '/contact' ) ) . '"></a><div class="flex"><img src="' . get_template_directory_uri() . '/assets/images/icon-contact.svg"><span class="flex__txt">This is latest. Do you want to add your project on the next page?</span></div></div>';
+				echo '<div class="pagelink__next is-empty"><a href="' . esc_url( home_url( '/contact' ) ) . '"></a><div class="flex"><img src="' . get_template_directory_uri() . '/assets/images/icon-contact.svg"><span class="flex__txt">This is last number.<br>Add your project here?</span></div></div>';
 			}
 		?>
 		</div>

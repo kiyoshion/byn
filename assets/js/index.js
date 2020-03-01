@@ -1,7 +1,5 @@
 import "../sass/style.scss";
-import gsap from 'gsap/'
 import barba from '@barba/core'
-import barbaCss from '@barba/css'
 import barbaPrefetch from '@barba/prefetch'
 import { replaceHeadTags } from './replaceHeadTags.js'
 import { leaveAnimation, enterAnimation, leaveAnimationForNoThumb, enterAnimationForNoThumb } from './barbaAnimations.js'
@@ -11,33 +9,36 @@ import smoothScroll from './smoothScroll'
 import smoothAnimation from './smoothAnimation'
 import { toggleModal, resetModal } from './toggleModal'
 import scrollStalker from './scrollStalker'
-import loading from './loading'
-// import contactAnimation from './contactAnimation'
-
-// barba.use(barbaCss);
-
-// promise.then(() => {
 
 function load() {
     return new Promise((resolve, reject) => {
         window.addEventListener('load', function () {
             this.setTimeout(function () {
                 const loading = document.querySelector('.loading');
-                // const logo = document.querySelector('#logo');
-                // const path = document.querySelectorAll('path');
-                // let w = window.innerWidth;
-                // if (w < 768) {
-                //     console.log('<768!')
-                //     logo.style.fill = '#fff';
-                //     logo.style.stroke = '#fff';
-                //     path.forEach(el => {
-                //         el.style.stroke = '#fff';
-                //     })
-                // }
+
+                let width = window.innerWidth;
+
+                if (width > 768) {
+                    window.WebFontConfig = {
+                        google: { families: ['Noto+Sans+JP:500'] },
+                        active: function () {
+                            sessionStorage.fonts = true;
+                        }
+                    };
+
+                    var wf = document.createElement('script');
+                    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+                    wf.type = 'text/javascript';
+                    wf.async = 'true';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(wf, s);
+                }
+
                 loading.classList.add('is-loaded');
+
                 resolve();                
             }, 1000)
-        });
+        }, false);
     })
 }
 const promise = Promise.all([
@@ -66,14 +67,14 @@ promise.then(() => {
             body.classList.add('is-edge');
         } else if (userAgent.indexOf('chrome') != -1) {
             body.classList.add('is-chrome');
-            if (width > 767) {
+            if (width > 1024) {
                 smoothAnimation();
             }
         } else if (userAgent.indexOf('safari') != -1) {
             body.classList.add('is-safari');
         } else if (userAgent.indexOf('firefox') != -1) {
             body.classList.add('is-firefox');
-            if (width > 767) {
+            if (width > 1024) {
                 smoothAnimation();
             }
         }

@@ -38,6 +38,7 @@
 	$pid = $get_page_id->ID;
 	$thumbs_path = '/assets/images/';
 	$thumbs = [];
+	$thumb = get_the_post_thumbnail_url( $pid, 'full');
 	?>
 <div class="hero hero--has-thumb">
 	<?php 
@@ -45,7 +46,7 @@
 			$thumbs[$i] = get_template_directory_uri() . '/assets/images/front-' . $i . '.jpg';
 			$is_active = ( $i == 0 ) ? ' is-active' : '';
 			?>
-			<div class="hero__bg<?php echo $is_active; ?>" style="background-image:url('<?php echo $thumbs[$i]; ?>')">
+			<div class="hero__bg<?php echo $is_active; ?>" style="background-image:url('<?php echo $thumb; ?>')">
 				<div class="hero__bg-inner"></div>
 			</div>
 		<?php endfor;
@@ -97,20 +98,6 @@
 		</div>
 	</div>
 </div>
-		<!-- <div class="hero__pagination">
-			<div class="hero__pagination-from">01</div>
-			<div class="hero__pagination-line"></div>
-			<div class="hero__pagination-to">04</div>
-		</div>
-	<div class="hero__sliderFunction">
-		<div id="sliderLeft" class="hero__sliderFunction--left">←</div>
-		<div id="sliderRight" class="hero__sliderFunction--right">→</div>
-	</div>
-	<div class="hero__ttl"><span>MAGAZINE</span></div>
-	<div class="hero__postTtl">
-		<span></span>
-	</div>
-</div> -->
 <?php else:
 	
 	$thumb = get_the_post_thumbnail_url( get_the_ID(), 'full'); ?>

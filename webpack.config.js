@@ -4,10 +4,6 @@ const enabledSourceMap = MODE === "development";
 module.exports = {
     mode: MODE,
     entry: `./assets/js/index.js`,
-    // output: {
-    //     path: `${__dirname}/dist`,
-    //     filename: "main.js"
-    // },
     module: {
         rules: [
             {
@@ -17,7 +13,6 @@ module.exports = {
                     {
                         loader: "css-loader",
                         options: {
-                            // url: false,
                             sourceMap: enabledSourceMap,
                             importLoaders: 2
                         }
@@ -46,15 +41,6 @@ module.exports = {
                 loaders: [
                     'url-loader'
                 ]
-                // use: [
-                //     {
-                //         loader: 'file-loader',
-                //         options: {
-                //             name: '[name].[ext]',
-                //             outputPath: 'fonts/'
-                //         }
-                //     }
-                // ]
             }
         ]
     }

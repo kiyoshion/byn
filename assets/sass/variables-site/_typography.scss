@@ -1,7 +1,8 @@
-$font__main: 'Futura', 'Noto Sans JP', sans-serif;
-$font__content: 'Noto Sans JP', sans-serif;
+$font__main: 'Futura', 'Noto Sans CJK JP', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
+$font__content: 'Noto Sans CJK JP', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
 $font__code: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 $font__pre: "Courier 10 Pitch", Courier, monospace;
+$font__weight: 500;
 $font__line-height-body-sp: 1.8;
 $font__line-height-body: 2;
 $font__line-height-pre: 1.6;
