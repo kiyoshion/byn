@@ -28,7 +28,4 @@ function replaceHeadTags(target) {
         head.appendChild(newHeadTags[i]);
     }
 
-    if (typeof ga === 'function') {
-        ga('send', 'pageview', location.pathname);
-    }
 }
