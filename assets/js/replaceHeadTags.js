@@ -27,4 +27,8 @@ function replaceHeadTags(target) {
     for (var i = 0; i < newHeadTags.length; i++) {
         head.appendChild(newHeadTags[i]);
     }
+
+    if (typeof ga === 'function') {
+        ga('send', 'pageview', location.pathname);
+    }
 }

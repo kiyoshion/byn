@@ -468,7 +468,7 @@ body {
     }
     margin: 2rem auto;
     max-width: 90%;
-    @include mq(sm) {
+    @include mq() {
         display: grid;
         margin: 0;
         max-width: 100%;
@@ -523,7 +523,7 @@ body {
             }
         }
     }
-    @include mq() {
+    @include mq(xl) {
         &__about {
             grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
             grid-template-rows: 20vh 20vh 20vh 20vh 20vh 20vh 20vh 20vh 100vh 100vh 50vh;
@@ -548,6 +548,119 @@ body {
             }
             div:nth-child(7) {
                 grid-area: 9 / 1 / 10 / 11;
+            }
+        }
+    }
+}
+
+.flex__about {
+    &-ttl {
+        font-size: 5vw;
+        width: 90%;
+        margin: 5vh auto;
+    }
+    &-txt--right,
+    &-img--left {
+        width: 90%;
+        margin: 5vh auto;
+    }
+    &-txt--right {
+        .item {
+            &-1 {
+                width: 45%;
+                float: left;
+            }
+            &-2 {
+                width: 45%;
+                float: right;
+            }
+            &__img-wrap {
+                height: 30vh;
+            }
+            &__img {
+                height: 100%;
+            }
+        }
+    }
+    &--full {
+        .item {
+            margin: 0;
+            &__img-wrap {
+                min-height: 50vh;
+            }
+            &__img {
+                height: 100%;
+            }
+        }
+    }
+    &--middle {
+        width: 90%;
+        margin: 5vh auto;
+        .flex__about--left {
+            font-family: $font__main;
+            text-align: left;
+        }
+    }
+    @include mq() {
+        margin: 0 0 20vh;
+        &-ttl {
+            font-size: 10vw;
+        }
+        &-txt--right {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            float: right;
+            width: 40%;
+            margin-right: 10%;
+            .item {
+                position: absolute;
+                margin: 0px;
+                right: 0px;
+                &-1 {
+                    width: 400px;
+                    bottom: -50vh;
+                }
+                &-2 {
+                    width: 400px;
+                    right: inherit;
+                    bottom: -75vh;
+                }
+                &__img-wrap {
+                    width: 400px;
+                    height: 400px;
+                }
+            }
+        }
+        &-img--left {
+            width: 40%;
+            margin: 0;
+            .item {
+                margin: 0;
+                &__img-wrap {
+                    min-height: 75vh;
+                }
+            }
+            .flex__about-txt--bottom {
+                margin: 10vh 0 10vh 10%;
+            }
+        }
+        &--full {
+            .item {
+                margin: -50px 0;
+                &__img-wrap {
+                    height: 100vh;
+                }
+            }
+        }
+        &--middle {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+            margin: 10vh auto;
+            div {
+                width: 45%;
             }
         }
     }
