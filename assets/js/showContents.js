@@ -112,12 +112,12 @@ export default function () {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-active');
-                gsap.to(entry.target.firstElementChild, {
+                gsap.to(entry.target.querySelector('img'), {
                     duration: .4,
                     ease: 'power4.in',
                     opacity: 1,
                     onComplate: function () {
-                        gsap.to(entry.target.firstElementChild, {
+                        gsap.to(entry.target.querySelector('img'), {
                             duration: 1.6,
                             delay: .4,
                             ease: 'power4.out',
@@ -128,12 +128,12 @@ export default function () {
                 });
 
                 entry.target.nextElementSibling.classList.add('is-active');
-                gsap.to(entry.target.nextElementSibling.firstElementChild, {
+                gsap.to(entry.target.nextElementSibling.querySelector('img'), {
                     duration: .4,
                     ease: 'power4.in',
                     opacity: 1,
                     onComplate: function () {
-                        gsap.to(entry.target.nextElementSibling.firstElementChild, {
+                        gsap.to(entry.target.nextElementSibling.querySelector('img'), {
                             duration: 1.6,
                             delay: .4,
                             ease: 'power4.out',

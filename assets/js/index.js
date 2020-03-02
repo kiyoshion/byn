@@ -51,6 +51,9 @@ promise.then(() => {
 
     let width = window.innerWidth;
     let body = document.querySelector('body');
+    const gaPush = pagename => {
+        ga('send', 'pageview', pagename)
+    }
 
     barba.hooks.beforeEnter((data) => {
         // this hook will be called for each transitions
@@ -117,6 +120,7 @@ promise.then(() => {
                 beforeEnter({ next }) {
                     const scrollElem = document.scrollingElement || document.documentElement;
                     scrollElem.scrollTop = 0;
+                    gaPush(location.pathname);
                 },
                 enter({ current, next, trigger }) {
                     if (next.namespace === 'has-thumb') {
