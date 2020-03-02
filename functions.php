@@ -128,8 +128,6 @@ add_action( 'widgets_init', 'byn_widgets_init' );
 function byn_scripts() {
 	wp_enqueue_style( 'byn-style', get_stylesheet_uri() );
 
-	// wp_enqueue_style( 'Noto Sans JP', 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:500&display=swap' );
-
 	wp_enqueue_script( 'main', get_template_directory_uri() . '/dist/main.js', array(), '', true );
 
 
@@ -142,6 +140,15 @@ function byn_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'byn_scripts' );
+
+add_action( 'wp_enqueue_scripts', function() {
+	wp_deregister_script( 'jquery' );
+	wp_enqueue_script( 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', [], false, true);
+});
+add_filter('script_loader_tag',function( $tag, $handle ) {
+	if($handle=='jquery') return $tag;
+	return str_replace( ' src', ' async src', $tag );
+}, 10, 2);
 
 function my_meta_ogp() {
   if( is_front_page() || is_home() || is_singular() ){
@@ -195,6 +202,14 @@ function my_meta_ogp() {
 } //END my_meta_ogp
 
 add_action('wp_head','my_meta_ogp');//headにOGPを出力
+
+add_post_type_support( 'page', 'excerpt' );
+
+add_action( 'wp_enqueue_scripts', function() {
+	if(!is_page('contact')) { 
+		wp_deregister_script( 'contact-form-7' );
+}
+});
 
 /**
  * Implement the Custom Header feature.
