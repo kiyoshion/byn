@@ -1,6 +1,7 @@
 import "../sass/style.scss";
 import barba from '@barba/core'
 import barbaPrefetch from '@barba/prefetch'
+import gsap from 'gsap/'
 import { replaceHeadTags } from './replaceHeadTags.js'
 import { leaveAnimation, enterAnimation, leaveAnimationForNoThumb, enterAnimationForNoThumb } from './barbaAnimations.js'
 import showContents from './showContents'
@@ -13,6 +14,17 @@ import scrollStalker from './scrollStalker'
 function load() {
     return new Promise((resolve, reject) => {
         window.addEventListener('load', function () {
+            const strs = document.querySelectorAll('#strs g');
+            strs.forEach((e, index) => {
+                gsap.to(e, {
+                    duration: .6,
+                    delay: .1 * index,
+                    ease: 'power4.out',
+                    y: 0,
+                    scale: 1,
+                    opacity: 1,
+                })
+            })
             this.setTimeout(function () {
                 const loading = document.querySelector('.loading');
 
@@ -37,7 +49,7 @@ function load() {
                 loading.classList.add('is-loaded');
 
                 resolve();                
-            }, 1000)
+            }, 2000)
         }, false);
     })
 }
