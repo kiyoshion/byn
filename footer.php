@@ -25,7 +25,7 @@
 		</div>
 	</footer>
 
-	<div class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+	<div class="menu-toggle">
 		<span></span>
 		<span></span>
 	</div>

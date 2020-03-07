@@ -51,7 +51,6 @@
 			</div>
 		<?php endfor;
 	?>
-	<h1 class="hero__ttl"></h1>
 	<div class="hero__lead">
 		<div class="hero__lead-inner">
 			<h2 class="hero__lead-ttl"><?php the_field( 'hero_ttl', $pid ); ?></h2>

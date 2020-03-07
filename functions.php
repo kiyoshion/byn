@@ -150,6 +150,17 @@ add_action( 'wp_enqueue_scripts', 'byn_scripts' );
 // 	return str_replace( ' src', ' async src', $tag );
 // }, 10, 2);
 
+add_action('init', function() {
+	remove_filter('the_excerpt', 'wpautop');
+	remove_filter('the_content', 'wpautop');
+});
+
+add_filter('tiny_mce_before_init', function($init) {
+	$init['wpautop'] = false;
+	$init['apply_source_formatting'] = true;
+	return $init;
+});
+
 function my_meta_ogp() {
   if( is_front_page() || is_home() || is_singular() ){
     global $post;

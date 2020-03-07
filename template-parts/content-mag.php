@@ -10,17 +10,15 @@
 ?>
 
 <div class="content__item js-wrap">
-<!-- <div class="item" style="height:100vh;"> -->
-<?php /*?>	<a class="content__item-link" href="<?php the_permalink(); ?>"></a><?php */?>
 
-		<?php 
-		echo '<div class="content__item-thumbnail">';
-		the_post_thumbnail('full', array('class' => 'content__item-thumbnail-inner')); 
-		echo '</div>';
-		$sub_thumb = get_field( 'sub_thumbnail' );
-		$upload_dir = wp_upload_dir();
-		echo '<div class="content__item-sub-thumbnail"><img src="' . $upload_dir['baseurl'] . '/' . $sub_thumb . '" alt=""></div>';
-		?>
+	<?php 
+	echo '<div class="content__item-thumbnail">';
+	the_post_thumbnail('full', array('class' => 'content__item-thumbnail-inner')); 
+	echo '</div>';
+	$sub_thumb = get_field( 'sub_thumbnail' );
+	$upload_dir = wp_upload_dir();
+	echo '<div class="content__item-sub-thumbnail"><img src="' . $upload_dir['baseurl'] . '/' . $sub_thumb . '" alt="' . $sub_thumb . '"></div>';
+	?>
 
 	<div class="content__item-inner">
 		<?php

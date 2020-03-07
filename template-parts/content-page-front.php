@@ -79,7 +79,7 @@ $pid = $get_page_id->ID;
 	</div>
 	<div class="content__front-img-inner item js-wrap">
 		<div class="item__img-wrap">
-			<img class="item__img" src="<?php echo get_field( 'what_img', $pid ); ?>">
+			<img class="item__img" src="<?php echo get_field( 'what_img', $pid ); ?>" alt="<?php echo esc_url( bloginfo( 'name' ) ); ?>">
 		</div>
 	</div>
 </section>
